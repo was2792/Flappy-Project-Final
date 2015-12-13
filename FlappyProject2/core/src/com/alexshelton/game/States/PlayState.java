@@ -31,12 +31,11 @@ public class PlayState extends State {
     private float score;
     private Bird bird;
     private Texture bg;
-    private Texture ground, ground2, ground3, ground4;
+    private Texture ground, ground2, ground3;
     private Texture bg2;
     private Texture android_bg;
     private Texture cob_bg;
     private Vector2 groundPos1, groundPos2;
-
 
     //Variable for Array of Tubes
     private Array<Tube> tubes;
@@ -182,7 +181,7 @@ public class PlayState extends State {
 
         //Write score to screen
         font.setColor(Color.WHITE);
-        font.draw(sb, String.format("%.0f", score), scoreX,scoreY);
+        font.draw(sb, String.format("%.0f", score), scoreX, scoreY);
 
         sb.end();
 
@@ -210,7 +209,7 @@ public class PlayState extends State {
     private  void updateScoreLocation(){
         //continue to update position of score text as screen moves right
        if(scoreX > 1)
-          scoreX = scoreX + 1.66f;
+          scoreX = bird.getBounds().x;
 
     }
 
