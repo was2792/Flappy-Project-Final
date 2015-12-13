@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class FlappyBird extends Game {
 
+	//Set Width and Height of the Game Screen
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
 
@@ -18,19 +19,13 @@ public class FlappyBird extends Game {
 	public static final String TITLE = "Flappy";
 
 	public GameStateManager gsm;
-
 	public SpriteBatch batch;
-
 	private Music music;
-
+	//Font to store things I write to the screen
 	public BitmapFont font;
 
 
-
-
-
-
-	
+	//Create Method for the Game Sets Music, GameState, and initial Sprite Batch
 	@Override
 	public void create () {
 		batch = new SpriteBatch();

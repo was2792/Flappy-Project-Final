@@ -26,6 +26,8 @@ public class Bird {
     private Texture texture3;
     private Texture texture4;
 
+
+
     public Bird(int x, int y){
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0,0,0);
@@ -38,6 +40,7 @@ public class Bird {
         cardinalAnimation = new Animation(new TextureRegion(texture3), 3, 0.5f);
         wesAnimation = new Animation(new TextureRegion(texture4),3,0.5f);
         bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
+
     }
 
     public void update(float dt){
@@ -46,17 +49,21 @@ public class Bird {
         cardinalAnimation.update(dt);
         wesAnimation.update(dt);
 
-        if(position.y > 0)
-            velocity.add(0, GRAVITY , 0);
-        velocity.scl(dt);
-        position.add(MOVEMENT * dt, velocity.y, 0);
-        if(position.y < 0)
-            position.y = 0;
 
-        velocity.scl(1/dt);
-        bounds.setPosition(position.x, position.y);
 
-    }
+            if (position.y > 0)
+                velocity.add(0, GRAVITY, 0);
+            velocity.scl(dt);
+            position.add(MOVEMENT * dt, velocity.y, 0);
+            if (position.y < 0)
+                position.y = 0;
+
+            velocity.scl(1 / dt);
+            bounds.setPosition(position.x, position.y);
+        }
+
+
+
 
     public Vector3 getPosition() {
         return position;
@@ -76,8 +83,14 @@ public class Bird {
     }
 
     public void jump(){
+
         velocity.y = 250;
+
     }
+
+
+
+
 
     public Rectangle getBounds(){
         return bounds;

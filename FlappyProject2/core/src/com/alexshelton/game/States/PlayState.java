@@ -16,17 +16,19 @@ import com.badlogic.gdx.utils.Array;
  * Created by Alex on 11/14/2015.
  */
 public class PlayState extends State {
+
+    //Constant Variables for Tube Count, Spacing, and Ground Offset
     private static final int TUBE_SPACING = 125;
     private static final int TUBE_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -50;
 
-    private BitmapFont font;
-    private float testx = 120;
-    private float y = 375 ;
 
+    //Constants for displaying Score
+    private float scoreX = 120;
+    private float scoreY = 375 ;
 
+    //Variables for the score, vector, and all Textures
     private float score;
-
     private Bird bird;
     private Texture bg;
     private Texture ground, ground2, ground3, ground4;
@@ -36,11 +38,11 @@ public class PlayState extends State {
     private Vector2 groundPos1, groundPos2;
 
 
-
+    //Variable for Array of Tubes
     private Array<Tube> tubes;
 
 
-
+    //PlayState Constructor
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 100);
@@ -54,26 +56,26 @@ public class PlayState extends State {
         android_bg = new Texture("android_bg.png");
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + ground.getWidth(),GROUND_Y_OFFSET);
-
         font = new BitmapFont(Gdx.files.internal("text.fnt"));
         font.getData().setScale(0.5f,0.5f);
-
-
         tubes = new Array<Tube>();
 
-
-
-
+        //Add tubes
         for(float i = 1; i <= TUBE_COUNT; i++){
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
-
         }
     }
 
     @Override
     protected void handleInput() {
+
+        //On Screen touch make bird jump
+
         if(Gdx.input.justTouched())
             bird.jump();
+
+
+
 
     }
 
@@ -88,31 +90,29 @@ public class PlayState extends State {
         if(bird.getBounds().x >= 156)
             score = (bird.getBounds().x / 176) - 0.6f ;
 
-
         for(int i = 0; i < tubes.size; i++){
-
             Tube tube = tubes.get(i);
 
+
             if(cam.position.x - cam.viewportWidth / 2 > tube.getPosTopTube().x + tube.getTopTube(score).getWidth()){
-                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT), score);
             }
 
-            
+            //Check for tube collision
+           if(tube.collides(bird.getBounds()))
 
+               gsm.set(new GameOver(gsm, score));
 
-
-
-            if(tube.collides(bird.getBounds()))
-
-                gsm.set(new GameOver(gsm, score));
 
             }
-
+            //Check for ground collision
              if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET)
 
-                gsm.set(new GameOver(gsm, score));
+               gsm.set(new GameOver(gsm, score));
 
 
+
+            //update camera
             cam.update();
 
 
@@ -127,7 +127,7 @@ public class PlayState extends State {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
 
-
+        //Determine what to render based on score
         {
 
             if (score <= 3) {
@@ -152,13 +152,14 @@ public class PlayState extends State {
 
             }
 
-
+            //pass score to tube to determine what to render
             for (Tube tube : tubes) {
 
                 sb.draw(tube.getTopTube(score), tube.getPosTopTube().x, tube.getPosTopTube().y);
                 sb.draw(tube.getBottomTube(score), tube.getPosBotTube().x, tube.getPosBotTube().y);
             }
 
+            //determine what ground to render
             if(score <= 3) {
                 sb.draw(ground, groundPos1.x, groundPos1.y);
                 sb.draw(ground, groundPos2.x, groundPos2.y);
@@ -185,8 +186,9 @@ public class PlayState extends State {
 
         sb.begin();
 
+        //Write score to screen
         font.setColor(Color.WHITE);
-        font.draw(sb, String.format("%.0f", score) ,testx,y);
+        font.draw(sb, String.format("%.0f", score), scoreX,scoreY);
 
 
         sb.end();
@@ -213,8 +215,8 @@ public class PlayState extends State {
     }
 
     private  void updateScoreLocation(){
-       if(testx > 1)
-           testx = testx + 1.66f;
+       if(scoreX > 1)
+          scoreX = scoreX + 1.66f;
 
     }
 

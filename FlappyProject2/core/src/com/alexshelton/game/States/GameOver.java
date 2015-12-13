@@ -21,7 +21,7 @@ public class GameOver extends State {
     Texture ground;
     Texture background;
     Texture gameover;
-    private Vector2 groundPos1, groundPos2;
+    private Vector2 groundPos1;
 
 
 
@@ -33,7 +33,7 @@ public class GameOver extends State {
         cam.setToOrtho(false, FlappyBird.WIDTH / 2 , FlappyBird.HEIGHT /2 );
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth / 2, GROUND_Y_OFFSET);
         ground = new Texture("ground.png");
-        groundPos2 = new Vector2((cam.position.x - cam.viewportWidth / 2) + ground.getWidth(),GROUND_Y_OFFSET);
+
         font = new BitmapFont(Gdx.files.internal("text.fnt"));
         font.getData().setScale(1f,1f);
         font2 = new BitmapFont(Gdx.files.internal("text.fnt"));
@@ -87,7 +87,7 @@ public class GameOver extends State {
             font2.draw(sb, "SUCKER", 50, 375);
         }
         else{
-            font2.draw(sb, "GOOGLE IT!", 10, 375);
+            font2.draw(sb, "GOOGLE IT!",30, 350);
         }
 
         sb.end();
