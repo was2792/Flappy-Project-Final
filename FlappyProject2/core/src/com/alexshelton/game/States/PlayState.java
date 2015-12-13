@@ -74,9 +74,6 @@ public class PlayState extends State {
         if(Gdx.input.justTouched())
             bird.jump();
 
-
-
-
     }
 
     @Override
@@ -123,7 +120,6 @@ public class PlayState extends State {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
 
@@ -159,7 +155,7 @@ public class PlayState extends State {
                 sb.draw(tube.getBottomTube(score), tube.getPosBotTube().x, tube.getPosBotTube().y);
             }
 
-            //determine what ground to render
+            //determine what ground to render based on current score
             if(score <= 3) {
                 sb.draw(ground, groundPos1.x, groundPos1.y);
                 sb.draw(ground, groundPos2.x, groundPos2.y);
@@ -179,10 +175,8 @@ public class PlayState extends State {
 
         }
 
-
-
-
         sb.end();
+
 
         sb.begin();
 
@@ -190,14 +184,13 @@ public class PlayState extends State {
         font.setColor(Color.WHITE);
         font.draw(sb, String.format("%.0f", score), scoreX,scoreY);
 
-
         sb.end();
-
 
     }
 
     @Override
     public void dispose() {
+        //call methods to dispose of bird and tubes as they pass off screen
         bg.dispose();
         bird.dispose();
 
@@ -215,17 +208,10 @@ public class PlayState extends State {
     }
 
     private  void updateScoreLocation(){
+        //continue to update position of score text as screen moves right
        if(scoreX > 1)
           scoreX = scoreX + 1.66f;
 
     }
-
-    private float getScore() {
-
-        return score;
-    }
-
-
-
 
 }

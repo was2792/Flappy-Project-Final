@@ -13,8 +13,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class GameOver extends State {
 
-    private static final int TUBE_SPACING = 125;
-    private static final int TUBE_COUNT = 4;
+    //variables for ground and score on Game Over screen
     private static final int GROUND_Y_OFFSET = -50;
     private float finalScore;
 
@@ -25,7 +24,7 @@ public class GameOver extends State {
 
 
 
-
+    //Game Over constructor
     public GameOver(GameStateManager gsm, float FS) {
         super(gsm);
         background = new Texture("bg.png");
@@ -40,9 +39,9 @@ public class GameOver extends State {
         font2.getData().setScale(0.5f,0.5f);
         finalScore = FS;
 
-
     }
 
+    //on gameover screen, tapping starts a new game state
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
@@ -62,21 +61,21 @@ public class GameOver extends State {
     public void render(SpriteBatch sb) {
 
         sb.setProjectionMatrix(cam.combined);
+
         sb.begin();
-
-
 
         sb.draw(background, cam.position.x - (cam.viewportWidth / 2), 0);
         sb.draw(gameover, groundPos1.x + 27, groundPos1.y + 300);
         sb.draw(ground, groundPos1.x, groundPos1.y);
 
-
         sb.end();
 
         sb.begin();
+
         font.setColor(Color.WHITE);
         font.draw(sb, String.format("%.0f", finalScore), 90f, 200);
 
+        //display a different taunt based on final score
         if(finalScore <=3){
             font2.draw(sb, "UR GARBAGE", 15, 350);
         }
@@ -91,8 +90,6 @@ public class GameOver extends State {
         }
 
         sb.end();
-
-
 
     }
 

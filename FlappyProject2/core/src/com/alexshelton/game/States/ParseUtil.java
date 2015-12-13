@@ -16,6 +16,7 @@ import java.net.URLConnection;
  */
 public class ParseUtil implements Net.HttpResponseListener {
 
+    //variables holding the Parse connection URL and connection strings
     private URL url = null;
     private URLConnection conn = null;
     private String app_id;
@@ -33,6 +34,7 @@ public class ParseUtil implements Net.HttpResponseListener {
 
     public void add_net_score(){
         // LibGDX NET CLASS
+        //Add final game score to Parse database using HTTP POST
         Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
         httpPost.setUrl("https://api.parse.com/1/classes/score/");
         httpPost.setHeader("Content-Type", "application/json");
@@ -89,6 +91,7 @@ public class ParseUtil implements Net.HttpResponseListener {
 
     public void get_net_score(){
         // LibGDX NET CLASS
+        //Retrieve game scores from Parse database using HTTP GET request
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         httpGet.setUrl("https://api.parse.com/1/classes/score/");
         httpGet.setHeader("Content-Type", "application/json");
