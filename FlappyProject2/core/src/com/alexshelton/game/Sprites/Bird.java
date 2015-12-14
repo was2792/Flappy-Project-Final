@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Bird {
 
+    //variables to store attributes of the birds, textures, and physics of bird movement
     private static final int GRAVITY = -15;
     private static final int MOVEMENT = 100;
     private Vector3 position;
@@ -29,8 +30,10 @@ public class Bird {
 
 
     public Bird(int x, int y){
+        //Bird constructor
         position = new Vector3(x, y, 0);
         velocity = new Vector3(0,0,0);
+        //variables holding each type of "bird"
         texture = new Texture("birdanimation.png");
         texture2 = new Texture("birdanimation2.png");
         texture3 = new Texture("cardinalanimation.png");
@@ -50,8 +53,6 @@ public class Bird {
         cardinalAnimation.update(dt);
         wesAnimation.update(dt);
 
-
-
             if (position.y > 0)
                 velocity.add(0, GRAVITY, 0);
             velocity.scl(dt);
@@ -62,8 +63,6 @@ public class Bird {
             velocity.scl(1 / dt);
             bounds.setPosition(position.x, position.y);
         }
-
-
 
 
     public Vector3 getPosition() {
@@ -84,20 +83,18 @@ public class Bird {
     }
 
     public void jump(){
-
+        //change the velocity of the bird to resemble a jump
         velocity.y = 250;
 
     }
 
-
-
-
-
     public Rectangle getBounds(){
         return bounds;
+
     }
 
     public void dispose(){
         texture.dispose();
+
     }
 }

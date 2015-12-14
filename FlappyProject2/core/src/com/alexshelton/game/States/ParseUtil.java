@@ -17,6 +17,7 @@ import java.net.URLConnection;
  */
 public class ParseUtil implements Net.HttpResponseListener {
 
+    //variables holding the Parse connection URL and connection strings
     private URL url = null;
     private URLConnection conn = null;
     private String app_id;
@@ -32,6 +33,21 @@ public class ParseUtil implements Net.HttpResponseListener {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void add_net_score(){
+        // LibGDX NET CLASS
+        //Add final game score to Parse database using HTTP POST
+        Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
+        httpPost.setUrl("https://api.parse.com/1/classes/score/");
+        httpPost.setHeader("Content-Type", "application/json");
+        httpPost.setHeader("X-Parse-Application-Id", app_id);
+        httpPost.setHeader("X-Parse-REST-API-Key", app_key);
+        httpPost.setContent("{\"score\": 1337, \"user\": \"CarelessLabs Java\"}");
+        Gdx.net.sendHttpRequest(httpPost, ParseUtil.this);
+    }
+
+>>>>>>> refs/remotes/was2792/master
 
     public boolean add_score(String gameScore){
         // USING JAVA IO AND NET CLASS
@@ -81,6 +97,7 @@ public class ParseUtil implements Net.HttpResponseListener {
 
     public void get_net_score(){
         // LibGDX NET CLASS
+        //Retrieve game scores from Parse database using HTTP GET request
         Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
         httpGet.setUrl("https://api.parse.com/1/classes/score/");
         httpGet.setHeader("Content-Type", "application/json");
