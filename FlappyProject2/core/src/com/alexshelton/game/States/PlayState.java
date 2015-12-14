@@ -31,7 +31,7 @@ public class PlayState extends State {
     private float score;
     private Bird bird;
     private Texture bg;
-    private Texture ground, ground2, ground3;
+    private Texture ground, ground2, ground3, ground4;
     private Texture bg2;
     private Texture android_bg;
     private Texture cob_bg;
@@ -50,6 +50,7 @@ public class PlayState extends State {
         ground = new Texture("ground.png");
         ground2 = new Texture("Ground3.png");
         ground3 = new Texture("Ground2.png");
+        ground4 = new Texture("Ground4.png");
         bg2 = new Texture("bg.png");
         cob_bg = new Texture("classroom_bg.png");
         android_bg = new Texture("android_bg.png");
@@ -168,8 +169,8 @@ public class PlayState extends State {
                 sb.draw(ground3, groundPos2.x, groundPos2.y);
             }
             else if (score > 9){
-                sb.draw(ground, groundPos1.x, groundPos1.y);
-                sb.draw(ground, groundPos2.x, groundPos2.y);
+                sb.draw(ground4, groundPos1.x, groundPos1.y);
+                sb.draw(ground4, groundPos2.x, groundPos2.y);
             }
 
         }
