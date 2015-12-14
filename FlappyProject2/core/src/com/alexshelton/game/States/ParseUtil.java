@@ -32,14 +32,11 @@ public class ParseUtil implements Net.HttpResponseListener {
             System.out.println(e.getMessage());
         }
     }
-
-
     public boolean add_score(String gameScore){
         // USING JAVA IO AND NET CLASS
         try {
             conn = url.openConnection();
             conn.setDoOutput(true);
-
             conn.setRequestProperty("X-Parse-Application-Id", app_id);
             conn.setRequestProperty("X-Parse-REST-API-Key", app_key);
             conn.setRequestProperty("Content-type", "application/json");
@@ -78,7 +75,6 @@ public class ParseUtil implements Net.HttpResponseListener {
             return false;
         }
     }
-
     @Override
     public void handleHttpResponse(Net.HttpResponse httpResponse) {
         final int statusCode = httpResponse.getStatus().getStatusCode();
