@@ -33,21 +33,6 @@ public class ParseUtil implements Net.HttpResponseListener {
         }
     }
 
-<<<<<<< HEAD
-=======
-    public void add_net_score(){
-        // LibGDX NET CLASS
-        //Add final game score to Parse database using HTTP POST
-        Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpPost.setUrl("https://api.parse.com/1/classes/score/");
-        httpPost.setHeader("Content-Type", "application/json");
-        httpPost.setHeader("X-Parse-Application-Id", app_id);
-        httpPost.setHeader("X-Parse-REST-API-Key", app_key);
-        httpPost.setContent("{\"score\": 1337, \"user\": \"CarelessLabs Java\"}");
-        Gdx.net.sendHttpRequest(httpPost, ParseUtil.this);
-    }
-
->>>>>>> refs/remotes/was2792/master
 
     public boolean add_score(String gameScore){
         // USING JAVA IO AND NET CLASS
@@ -59,8 +44,7 @@ public class ParseUtil implements Net.HttpResponseListener {
             conn.setRequestProperty("X-Parse-REST-API-Key", app_key);
             conn.setRequestProperty("Content-type", "application/json");
             OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-            //out.write("{\"score\": \"TestData\", \"user\": \"CarelessLabs GDX\"}");
-            //\"" + num + "\"
+            //out.write("{\"score\": \"TestData\", \"user\": \"CIS490Class\"}");
             out.write("{\"score\": \"" + gameScore + "\", \"user\": \"CIS490Class\"}");
             out.close();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -93,17 +77,6 @@ public class ParseUtil implements Net.HttpResponseListener {
             System.out.println(e.getMessage());
             return false;
         }
-    }
-
-    public void get_net_score(){
-        // LibGDX NET CLASS
-        //Retrieve game scores from Parse database using HTTP GET request
-        Net.HttpRequest httpGet = new Net.HttpRequest(Net.HttpMethods.GET);
-        httpGet.setUrl("https://api.parse.com/1/classes/score/");
-        httpGet.setHeader("Content-Type", "application/json");
-        httpGet.setHeader("X-Parse-Application-Id", app_id);
-        httpGet.setHeader("X-Parse-REST-API-Key", app_key);
-        Gdx.net.sendHttpRequest(httpGet,ParseUtil.this);
     }
 
     @Override

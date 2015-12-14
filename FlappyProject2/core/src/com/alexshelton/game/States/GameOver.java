@@ -46,7 +46,6 @@ public class GameOver extends State {
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
-            //parseUtil.add_net_score(String.valueOf(finalScore));
             parseUtil.add_score(String.valueOf(finalScore));
             gsm.set(new PlayState(gsm));
 
@@ -92,10 +91,7 @@ public class GameOver extends State {
         }
 
         sb.end();
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/was2792/master
     }
 
     @Override
