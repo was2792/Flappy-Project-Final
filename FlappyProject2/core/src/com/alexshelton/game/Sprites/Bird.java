@@ -39,7 +39,8 @@ public class Bird {
         birdAnimation2 = new Animation(new TextureRegion(texture2), 3, 0.5f);
         cardinalAnimation = new Animation(new TextureRegion(texture3), 3, 0.5f);
         wesAnimation = new Animation(new TextureRegion(texture4),3,0.5f);
-        bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
+        //bounds = new Rectangle(x, y, texture.getWidth() / 3, texture.getHeight());
+        bounds = new Rectangle(x, y, 1, 1);
 
     }
 
