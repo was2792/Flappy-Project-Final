@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+
 /**
  * Created by Julian on 12/7/2015.
  */
@@ -25,35 +26,26 @@ public class ParseUtil implements Net.HttpResponseListener {
         try {
             url = new URL("https://api.parse.com/1/classes/score/");
             app_id = "aj6gqhUuxJeewWLQVONrgcnaEF4z1haJAIAZbbiI";
-            app_key = "822bKFKvwmPWRNRo8xlKCMff1QfCwOpNOYFTb6FM";
+            app_key = "KOHU50nJmJGvI6MrW7W6X3kvAwegvF4Dmcox5XyJ";
         } catch (MalformedURLException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void add_net_score(){
-        // LibGDX NET CLASS
-        Net.HttpRequest httpPost = new Net.HttpRequest(Net.HttpMethods.POST);
-        httpPost.setUrl("https://api.parse.com/1/classes/score/");
-        httpPost.setHeader("Content-Type", "application/json");
-        httpPost.setHeader("X-Parse-Application-Id", app_id);
-        httpPost.setHeader("X-Parse-REST-API-Key", app_key);
-        httpPost.setContent("{\"score\": 1337, \"user\": \"CarelessLabs Java\"}");
-        Gdx.net.sendHttpRequest(httpPost, ParseUtil.this);
-    }
 
-
-    public boolean add_score(){
+    public boolean add_score(String gameScore){
         // USING JAVA IO AND NET CLASS
         try {
             conn = url.openConnection();
             conn.setDoOutput(true);
+
             conn.setRequestProperty("X-Parse-Application-Id", app_id);
             conn.setRequestProperty("X-Parse-REST-API-Key", app_key);
             conn.setRequestProperty("Content-type", "application/json");
             OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
-            out.write("{\"score\": 1337, \"user\": \"CarelessLabs GDX\"}");
-
+            //out.write("{\"score\": \"TestData\", \"user\": \"CarelessLabs GDX\"}");
+            //\"" + num + "\"
+            out.write("{\"score\": \"" + gameScore + "\", \"user\": \"CIS490Class\"}");
             out.close();
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String decodedString;

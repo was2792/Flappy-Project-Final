@@ -18,11 +18,12 @@ public class GameOver extends State {
     private static final int GROUND_Y_OFFSET = -50;
     private float finalScore;
 
+
     Texture ground;
     Texture background;
     Texture gameover;
     private Vector2 groundPos1;
-
+    ParseUtil parseUtil = new ParseUtil();
 
 
 
@@ -46,6 +47,8 @@ public class GameOver extends State {
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
+            //parseUtil.add_net_score(String.valueOf(finalScore));
+            parseUtil.add_score(String.valueOf(finalScore));
             gsm.set(new PlayState(gsm));
 
         }
@@ -55,7 +58,6 @@ public class GameOver extends State {
     @Override
     public void update(float dt) {
         handleInput();
-
     }
 
     @Override
@@ -87,13 +89,10 @@ public class GameOver extends State {
             font2.draw(sb, "SUCKER", 50, 375);
         }
         else{
-            font2.draw(sb, "GOOGLE IT!",30, 350);
+            font2.draw(sb, "GOOGLE IT!", 30, 350);
         }
 
         sb.end();
-
-
-
     }
 
     @Override
